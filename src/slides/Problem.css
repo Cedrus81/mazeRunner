@@ -1,11 +1,11 @@
 /* Problem Slide - Photo Cards */
 .problem-slide__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-6);
   margin-top: var(--space-8);
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
 }
 
 .problem-card {
@@ -15,12 +15,12 @@
 }
 
 .problem-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
 }
 
 .problem-card__image {
-  height: 160px;
+  height: 200px;
   background-size: cover;
   background-position: center;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -29,18 +29,19 @@
 }
 
 .problem-card__content {
-  padding: var(--space-4);
-  text-align: center;
+  padding: var(--space-5);
+  text-align: left;
 }
 
 .problem-card__title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
   color: var(--text-primary);
 }
 
 .problem-card__desc {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
+  line-height: 1.6;
 }
