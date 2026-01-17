@@ -1,0 +1,252 @@
+/* ========================================
+   SLIDE STYLES
+   ======================================== */
+
+/* === Title Slide === */
+.title-slide__robot {
+  margin-bottom: var(--space-6);
+}
+
+.title-slide__tagline {
+  font-size: var(--font-size-lg);
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: var(--space-2);
+}
+
+.title-slide__hint {
+  margin-top: var(--space-12);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.title-slide__hint kbd {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  margin: 0 var(--space-1);
+}
+
+/* === Problem Slide === */
+.problem-slide__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  width: 100%;
+  max-width: 900px;
+}
+
+.problem-card {
+  padding: var(--space-6);
+  text-align: center;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow-danger);
+}
+
+.problem-card__icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+}
+
+.problem-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.problem-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* === Robot Slide === */
+.robot-slide__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  width: 100%;
+  max-width: 1000px;
+}
+
+.feature-card {
+  padding: var(--space-5);
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  transition: border-color var(--transition-fast);
+}
+
+.feature-card:hover {
+  border-color: var(--accent-discover);
+}
+
+.feature-card__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.feature-card__content h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.feature-card__content p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* === Demo Slides === */
+.demo-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: var(--space-6);
+}
+
+.demo-map-area {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.demo-panel-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.demo-panel {
+  padding: var(--space-4);
+}
+
+.demo-panel__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* === Gamification Slide === */
+.gamification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  width: 100%;
+  max-width: 1100px;
+}
+
+.level-card {
+  padding: var(--space-6);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.level-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-discover), var(--accent-progress));
+}
+
+.level-card--level-2::before {
+  background: linear-gradient(90deg, var(--accent-warning), var(--accent-robot));
+}
+
+.level-card--level-3::before {
+  background: linear-gradient(90deg, var(--accent-danger), var(--accent-warning));
+}
+
+.level-card__number {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+
+.level-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.level-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* === Summary Slide === */
+.summary-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  width: 100%;
+  max-width: 700px;
+}
+
+.summary-point {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+}
+
+.summary-point__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.summary-point__icon--discover {
+  background: rgba(88, 166, 255, 0.2);
+}
+
+.summary-point__icon--progress {
+  background: rgba(63, 185, 80, 0.2);
+}
+
+.summary-point__icon--robot {
+  background: rgba(255, 213, 0, 0.2);
+}
+
+.summary-point__text {
+  font-size: var(--font-size-lg);
+}
+
+@media (max-width: 900px) {
+  .gamification-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .demo-container {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,54 @@
+import './slides.css'
+
+function TitleSlide() {
+  return (
+    <div className="slide">
+      <div className="title-slide__robot animate-float">
+        <svg width="120" height="120" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="robotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#ffd500' }}/>
+              <stop offset="100%" style={{ stopColor: '#ff9500' }}/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <rect x="25" y="35" width="50" height="45" rx="8" fill="url(#robotGrad)" filter="url(#glow)"/>
+          <rect x="30" y="15" width="40" height="25" rx="5" fill="url(#robotGrad)" filter="url(#glow)"/>
+          <circle cx="40" cy="27" r="5" fill="#0d1117"/>
+          <circle cx="60" cy="27" r="5" fill="#0d1117"/>
+          <circle cx="41" cy="26" r="2" fill="#58a6ff"/>
+          <circle cx="61" cy="26" r="2" fill="#58a6ff"/>
+          <line x1="50" y1="15" x2="50" y2="5" stroke="#ffd500" strokeWidth="3" strokeLinecap="round"/>
+          <circle cx="50" cy="5" r="4" fill="#58a6ff" filter="url(#glow)"/>
+          <rect x="15" y="75" width="20" height="15" rx="5" fill="#3fb950"/>
+          <rect x="65" y="75" width="20" height="15" rx="5" fill="#3fb950"/>
+          <ellipse cx="50" cy="50" rx="8" ry="5" fill="#58a6ff" opacity="0.8"/>
+        </svg>
+      </div>
+      
+      <h1 className="slide__title">
+        <span className="text-gradient">Tonybot Explorer</span>
+      </h1>
+      
+      <p className="slide__subtitle">
+        A Gamified Robotic Exploration System
+      </p>
+      
+      <div className="title-slide__tagline">
+        Navigate the unknown. Discover the unseen.
+      </div>
+      
+      <div className="title-slide__hint animate-pulse">
+        Press <kbd>→</kbd> or <kbd>Space</kbd> to begin
+      </div>
+    </div>
+  )
+}
+
+export default TitleSlide

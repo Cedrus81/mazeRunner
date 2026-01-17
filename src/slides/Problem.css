@@ -1,0 +1,46 @@
+/* Problem Slide - Photo Cards */
+.problem-slide__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+  width: 100%;
+  max-width: 1100px;
+}
+
+.problem-card {
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  cursor: default;
+}
+
+.problem-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.problem-card__image {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  margin: -1px -1px 0 -1px;
+  width: calc(100% + 2px);
+}
+
+.problem-card__content {
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.problem-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.problem-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}

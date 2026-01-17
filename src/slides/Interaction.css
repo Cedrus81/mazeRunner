@@ -1,0 +1,115 @@
+.interaction__junction {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.interaction__robot {
+  font-size: 3rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.interaction__paths {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 350px;
+}
+
+.interaction__path {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.interaction__path:hover:not(:disabled) {
+  transform: translateX(4px);
+}
+
+.interaction__path--safe {
+  border-color: var(--accent-progress);
+}
+
+.interaction__path--safe:hover:not(:disabled) {
+  background: rgba(63, 185, 80, 0.1);
+  box-shadow: var(--shadow-glow-progress);
+}
+
+.interaction__path--warning {
+  border-color: var(--accent-warning);
+}
+
+.interaction__path--warning:hover:not(:disabled) {
+  background: rgba(210, 153, 34, 0.1);
+}
+
+.interaction__path--blocked {
+  border-color: var(--accent-danger);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.interaction__path--selected {
+  background: rgba(88, 166, 255, 0.2);
+  border-color: var(--accent-discover);
+  box-shadow: var(--shadow-glow-discover);
+}
+
+.interaction__path-label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  min-width: 100px;
+}
+
+.interaction__path-desc {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.interaction__path-icon {
+  font-size: 1.25rem;
+}
+
+.interaction__decision {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.interaction__decision-label {
+  color: var(--text-secondary);
+}
+
+.interaction__decision-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--accent-discover);
+}
+
+.interaction__history {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.interaction__history-item {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-lg);
+}
