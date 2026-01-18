@@ -14,6 +14,17 @@ import GamificationSlide from './slides/07_Gamification'
 import FullDemoSlide from './slides/08_FullDemo'
 import SummarySlide from './slides/09_Summary'
 
+// All images to preload for seamless transitions
+const imagesToPreload = [
+  './rescue_hero.png',
+  './collapsed_structure.png',
+  './flooded_tunnel.png',
+  './narrow_pipe.png',
+  './hazardous_zone.png',
+  './tonybot_real.png',
+  './robot_junction.png',
+]
+
 const slides = [
   TitleSlide,
   ProblemSlide,
@@ -28,6 +39,28 @@ const slides = [
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
+
+  // Preload all images on mount
+  useEffect(() => {
+    let loadedCount = 0
+    const totalImages = imagesToPreload.length
+
+    imagesToPreload.forEach(src => {
+      const img = new Image()
+      img.onload = img.onerror = () => {
+        loadedCount++
+        if (loadedCount >= totalImages) {
+          setImagesLoaded(true)
+        }
+      }
+      img.src = src
+    })
+
+    // Fallback: show content after 3 seconds even if images fail
+    const timeout = setTimeout(() => setImagesLoaded(true), 3000)
+    return () => clearTimeout(timeout)
+  }, [])
 
   const goToSlide = useCallback((index) => {
     if (index >= 0 && index < slides.length) {
@@ -63,6 +96,30 @@ function App() {
   }, [nextSlide, prevSlide])
 
   const CurrentSlideComponent = slides[currentSlide]
+
+  // Show loading screen while images preload
+  if (!imagesLoaded) {
+    return (
+      <div className="app grid-background" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh'
+      }}>
+        <div style={{
+          textAlign: 'center',
+          color: 'var(--text-secondary)'
+        }}>
+          <div style={{
+            fontSize: '2rem',
+            marginBottom: '1rem',
+            animation: 'pulse 1.5s infinite'
+          }}>🤖</div>
+          <p>Loading presentation...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="app grid-background">
