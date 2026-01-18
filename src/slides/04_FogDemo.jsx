@@ -76,6 +76,7 @@ function FogDemoSlide() {
   const [visitedCells, setVisitedCells] = useState(new Set())
   const [isAutoMode, setIsAutoMode] = useState(true)
   const autoIntervalRef = useRef(null)
+  const isAutoModeRef = useRef(true)
   
   const revealAround = useCallback((row, col, currentRevealed) => {
     const newRevealed = new Set(currentRevealed)
@@ -123,17 +124,27 @@ function FogDemoSlide() {
     return () => { if (autoIntervalRef.current) clearInterval(autoIntervalRef.current) }
   }, [isAutoMode, autoMove])
   
+  // Keep ref in sync with state
+  useEffect(() => {
+    isAutoModeRef.current = isAutoMode
+  }, [isAutoMode])
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (isAutoMode) return
-      if (e.key === 'w' || e.key === 'W') moveRobot(-1, 0)
-      if (e.key === 's' || e.key === 'S') moveRobot(1, 0)
-      if (e.key === 'a' || e.key === 'A') moveRobot(0, -1)
-      if (e.key === 'd' || e.key === 'D') moveRobot(0, 1)
+      if (isAutoModeRef.current) return
+      const key = e.key.toLowerCase()
+      if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
+        e.preventDefault()
+        e.stopPropagation()
+        if (key === 'w') moveRobot(-1, 0)
+        if (key === 's') moveRobot(1, 0)
+        if (key === 'a') moveRobot(0, -1)
+        if (key === 'd') moveRobot(0, 1)
+      }
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [moveRobot, isAutoMode])
+    window.addEventListener('keydown', handleKeyDown, { capture: true })
+    return () => window.removeEventListener('keydown', handleKeyDown, { capture: true })
+  }, [moveRobot])
 
   const totalCells = GRID_SIZE * GRID_SIZE
   const wallCount = 17
