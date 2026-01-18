@@ -44,7 +44,7 @@ function ProblemSlide() {
           >
             <div 
               className="problem-card__image"
-              style={{ backgroundImage: `url(${problem.image})` }}
+              style={{ backgroundImage: `url(.${problem.image})` }}
             />
             <div className="problem-card__content">
               <h3 className="problem-card__title">{problem.title}</h3>
