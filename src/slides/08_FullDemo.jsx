@@ -7,8 +7,29 @@ const GOAL = { row: 10, col: 10 }
 
 function generateMap() {
   const map = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill('empty'))
-  const walls = [[1, 3], [2, 3], [3, 3], [1, 7], [2, 7], [3, 7], [4, 5], [5, 5], [6, 5],
-    [7, 2], [7, 3], [8, 7], [8, 8], [9, 4], [10, 4], [5, 9], [6, 9]]
+  const walls = [
+  // Block some of the outer ring (but keep openings)
+  [0,2],[0,3],[0,5],[0,7],[0,9],
+  [1,9],
+  [2,0],[2,2],[2,5],[2,7],[2,9],
+  [3,2],[3,5],[3,7],[3,9],
+  [4,0],[4,2],[4,4],[4,7],
+  [5,2],[5,4],[5,7],[5,9],
+  [6,0],[6,2],[6,6],[6,7],[6,9],
+  [7,2],[7,4],[7,6],[7,9],
+  [8,1],[8,2],[8,4],[8,6],
+  [9,2],[9,6],[9,8],
+  [10,2],[10,5],[10,6],[10,8],
+
+  // Internal blockers for denser maze + junctions
+  [1,3],[1,4],[1,6],[1,7],
+  [2,3],[2,4],
+  [3,3],[3,4],
+  [4,5],[4,6],
+  [6,4],[6,5],
+  [7,3],
+  [8,8],
+]
   walls.forEach(([r, c]) => { if (r < GRID_SIZE && c < GRID_SIZE) map[r][c] = 'wall' })
   map[GOAL.row][GOAL.col] = 'goal'
   return map
@@ -83,6 +104,10 @@ function FullDemoSlide() {
       if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
         e.preventDefault()
         e.stopPropagation()
+        // Blur any focused element to prevent interference
+        if (document.activeElement && document.activeElement !== document.body) {
+          document.activeElement.blur()
+        }
         if (moveRobotRef.current) {
           if (key === 'w') moveRobotRef.current(-1, 0)
           if (key === 's') moveRobotRef.current(1, 0)
@@ -91,8 +116,8 @@ function FullDemoSlide() {
         }
       }
     }
-    window.addEventListener('keydown', handleKeyDown, { capture: true })
-    return () => window.removeEventListener('keydown', handleKeyDown, { capture: true })
+    document.addEventListener('keydown', handleKeyDown, { capture: true })
+    return () => document.removeEventListener('keydown', handleKeyDown, { capture: true })
   }, [])
 
   const exploredPercent = Math.round((revealed.size / (GRID_SIZE * GRID_SIZE)) * 100)

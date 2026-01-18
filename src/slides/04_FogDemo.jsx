@@ -78,6 +78,7 @@ function FogDemoSlide() {
   const autoIntervalRef = useRef(null)
   const isAutoModeRef = useRef(true)
   const moveRobotRef = useRef(null)
+  const slideRef = useRef(null)
   
   const revealAround = useCallback((row, col, currentRevealed) => {
     const newRevealed = new Set(currentRevealed)
@@ -141,7 +142,10 @@ function FogDemoSlide() {
       if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
         e.preventDefault()
         e.stopPropagation()
-        console.log('Key pressed:', key)
+        // Blur any focused element to prevent interference
+        if (document.activeElement && document.activeElement !== document.body) {
+          document.activeElement.blur()
+        }
         if (moveRobotRef.current) {
           if (key === 'w') moveRobotRef.current(-1, 0)
           if (key === 's') moveRobotRef.current(1, 0)
@@ -150,8 +154,8 @@ function FogDemoSlide() {
         }
       }
     }
-    window.addEventListener('keydown', handleKeyDown, { capture: true })
-    return () => window.removeEventListener('keydown', handleKeyDown, { capture: true })
+    document.addEventListener('keydown', handleKeyDown, { capture: true })
+    return () => document.removeEventListener('keydown', handleKeyDown, { capture: true })
   }, [])
 
   const totalCells = GRID_SIZE * GRID_SIZE
@@ -251,12 +255,14 @@ function FogDemoSlide() {
             <button 
               className={`fog-slide__mode-btn ${isAutoMode ? 'fog-slide__mode-btn--active' : ''}`}
               onClick={() => setIsAutoMode(true)}
+              onMouseDown={(e) => e.target.blur()}
             >
               🤖 Auto
             </button>
             <button 
               className={`fog-slide__mode-btn ${!isAutoMode ? 'fog-slide__mode-btn--active' : ''}`}
               onClick={() => setIsAutoMode(false)}
+              onMouseDown={(e) => e.target.blur()}
             >
               🎮 Manual
             </button>
