@@ -14,28 +14,28 @@ function ProblemSlide() {
   const environments = [
     {
       id: 'collapsed',
-      image: '/collapsed_structure.png',
+      image: './collapsed_structure.png',
       title: 'Collapsed Structures',
       characteristics: 'Unstable debris, secondary collapse risk, sharp metal, limited visibility, dust-filled air',
       robotValue: 'Navigates rubble with stabilized movement, detects survivors through sensors, assesses structural integrity without human risk'
     },
     {
       id: 'flooded',
-      image: '/flooded_tunnel.png',
+      image: './flooded_tunnel.png',
       title: 'Flooded Tunnels',
       characteristics: 'Zero visibility, contaminated water, strong currents, electrical hazards, drowning risk',
       robotValue: 'Waterproof sensors map submerged spaces, identifies blockages, locates air pockets for trapped survivors'
     },
     {
       id: 'confined',
-      image: '/narrow_pipe.png',
+      image: './narrow_pipe.png',
       title: 'Confined Spaces',
       characteristics: 'Oxygen depletion, toxic gas accumulation, no emergency exit, claustrophobic passages',
       robotValue: 'Compact bipedal design navigates tight passages, atmospheric sensors detect hazardous gases before human entry'
     },
     {
       id: 'toxic',
-      image: '/hazardous_zone.png',
+      image: './hazardous_zone.png',
       title: 'Toxic Zones',
       characteristics: 'Airborne chemicals, radiation exposure, explosive atmospheres, corrosive materials',
       robotValue: 'Specialized sensors measure contamination levels, operates indefinitely in lethal atmospheres, provides real-time data for response planning'
@@ -56,7 +56,7 @@ function ProblemSlide() {
       <div className="problem-slide__content">
         <div className="problem-slide__visual">
           <img 
-            src="/collapsed_structure.png" 
+            src="./collapsed_structure.png" 
             alt="Rescue workers at a collapsed building"
             className="problem-slide__image"
           />

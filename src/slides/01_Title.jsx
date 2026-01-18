@@ -6,7 +6,7 @@ function TitleSlide() {
     <div className="slide title-slide">
       <div className="title-slide__hero">
         <img 
-          src="/rescue_hero.png" 
+          src="./rescue_hero.png" 
           alt="Rescue robot entering collapsed structure" 
           className="title-slide__image"
         />

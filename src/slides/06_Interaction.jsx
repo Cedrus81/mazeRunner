@@ -52,7 +52,7 @@ function InteractionSlide() {
 
       <div className="interaction-slide__visual">
         <img 
-          src="/robot_junction.png" 
+          src="./robot_junction.png" 
           alt="Robot at tunnel junction making decision"
           className="interaction-slide__image"
         />

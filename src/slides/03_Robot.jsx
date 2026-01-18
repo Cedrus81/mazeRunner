@@ -27,7 +27,7 @@ function RobotSlide() {
     <div className="slide robot-slide">
       <div className="robot-slide__hero">
         <img 
-          src="/tonybot_real.png" 
+          src="./tonybot_real.png" 
           alt="Tonybot bipedal robot by Hiwonder"
           className="robot-slide__image"
         />
