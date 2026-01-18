@@ -4,43 +4,57 @@ import './Summary.css'
 function SummarySlide() {
   return (
     <div className="slide summary-slide">
-      <div className="summary-slide__content">
-        <h1 className="summary-slide__title">
-          This is How We Explore the Unknown—<span className="text-gradient">Together</span>
+      <header className="slide-header">
+        <p className="slide-label">The Vision</p>
+        <h1 className="slide-title slide-title--large">
+          Human-Robot <span className="text-gradient">Partnership</span>
         </h1>
-        
-        <div className="summary-slide__pillars">
-          <div className="summary-pillar glass-panel">
-            <span className="summary-pillar__icon">👁️</span>
-            <h3>Awareness</h3>
-            <p>Real-time sensor data transforms uncertainty into navigable terrain.</p>
-          </div>
-          <div className="summary-pillar glass-panel">
-            <span className="summary-pillar__icon">🤝</span>
-            <h3>Collaboration</h3>
-            <p>Human judgment meets robotic capability at every decision point.</p>
-          </div>
-          <div className="summary-pillar glass-panel">
-            <span className="summary-pillar__icon">📈</span>
-            <h3>Progression</h3>
-            <p>Structured learning ensures operators are ready when it matters.</p>
-          </div>
-        </div>
+      </header>
 
-        <div className="summary-slide__vision glass-panel">
-          <h3>What's next?</h3>
-          <p>
-            Tonybot Explorer is a proof of concept for a new kind of human-robot partnership. 
-            The same principles can extend to underwater exploration, aerial reconnaissance, 
-            and any environment where human presence is dangerous but human judgment is essential.
+      <div className="summary-content">
+        <div className="summary-section">
+          <h3 className="summary-section__label">The Problem</h3>
+          <p className="summary-section__text">
+            Dangerous environments kill first responders. Robots can go where humans can't—but 
+            <strong> autonomous systems alone can't make human decisions</strong>.
           </p>
         </div>
 
-        <div className="summary-slide__cta">
-          <p className="summary-slide__closing">
-            When humans can't go forward, exploration doesn't stop.
+        <div className="summary-section">
+          <h3 className="summary-section__label">Our Approach</h3>
+          <div className="summary-points">
+            <div className="summary-point">
+              <span className="summary-point__marker">→</span>
+              <span><strong>Fog of War</strong> reflects real exploration uncertainty</span>
+            </div>
+            <div className="summary-point">
+              <span className="summary-point__marker">→</span>
+              <span><strong>Sensor data</strong> informs but doesn't decide</span>
+            </div>
+            <div className="summary-point">
+              <span className="summary-point__marker">→</span>
+              <span><strong>Human-in-the-loop</strong> at every critical moment</span>
+            </div>
+            <div className="summary-point">
+              <span className="summary-point__marker">→</span>
+              <span><strong>Progressive training</strong> builds real competence</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="summary-section summary-section--highlight">
+          <h3 className="summary-section__label">What Makes This Different</h3>
+          <p className="summary-section__text">
+            This isn't a robot demo. It's a <strong>training system for human operators</strong>. 
+            Gamification doesn't make it fun—it makes operators ready for real missions.
           </p>
         </div>
+      </div>
+
+      <div className="summary-footer">
+        <p className="summary-closing">
+          When humans can't go forward, exploration doesn't stop.
+        </p>
       </div>
     </div>
   )

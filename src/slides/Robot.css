@@ -1,9 +1,9 @@
-/* Robot Slide - Hero Product Presentation */
+/* Robot Slide - Visual Hierarchy */
 .robot-slide {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: var(--space-8);
-  padding: var(--space-6);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  padding: var(--space-5);
   align-items: center;
 }
 
@@ -14,91 +14,102 @@
 }
 
 .robot-slide__image {
-  border-radius: 1rem;
-  max-width: 100%;
+  max-height: 750px;
+  width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+  border-radius: var(--radius-lg);
 }
 
 .robot-slide__content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
-.robot-slide__header {
-  text-align: left;
-}
-
-.robot-slide__intro {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--space-2);
-}
-
-.robot-slide__title {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-3);
-}
-
-.robot-slide__tagline {
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.robot-slide__capabilities {
+/* Capabilities with Background Images */
+.robot-capabilities {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
-.capability {
+.capability-item {
+  position: relative;
   display: flex;
-  gap: var(--space-4);
+  align-items: center;
   padding: var(--space-4);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent-discover);
+  overflow: hidden;
+  min-height: 80px;
+}
+
+.capability-text {
+  position: relative;
+  z-index: 2;
+  display: flex;
   align-items: flex-start;
+  gap: var(--space-3);
+  flex: 1;
 }
 
-.capability__icon {
-  font-size: 1.5rem;
+.capability-icon {
+  font-size: 1.25rem;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.capability__text {
+.capability-content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-}
-
-.capability__title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
+  gap: 4px;
+  font-size: var(--font-size-sm);
   color: var(--text-primary);
 }
 
-.capability__desc {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  line-height: 1.5;
+.capability-content strong {
+  color: var(--accent-discover);
 }
 
-.capability__why {
+.capability-detail {
   font-size: var(--font-size-xs);
-  color: var(--accent-discover);
-  font-style: italic;
-  margin-top: var(--space-1);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Image on Right with Fade */
+.capability-image-wrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.capability-image-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+  background: linear-gradient(to right, var(--bg-tertiary) 0%, transparent 100%);
+  z-index: 1;
+}
+
+.capability-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
 }
 
 @media (max-width: 900px) {
   .robot-slide {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
   }
   
   .robot-slide__hero {
@@ -106,10 +117,10 @@
   }
   
   .robot-slide__image {
-    max-height: 250px;
+    max-height: 300px;
   }
   
-  .robot-slide__header {
-    text-align: center;
+  .capability-image-wrapper {
+    width: 40%;
   }
 }

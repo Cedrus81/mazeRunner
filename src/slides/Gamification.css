@@ -1,127 +1,134 @@
-/* Gamification Slide - Professional Progression */
+/* Gamification Slide - Progression Track */
 .gamification-slide {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-  padding: var(--space-6);
-  max-width: 1100px;
-  margin: 0 auto;
+  padding: var(--space-5);
+  align-items: center;
 }
 
-.gamification-slide__header {
+/* Progression Visual Track */
+.progression-visual {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 900px;
+  padding: var(--space-6) 0;
+}
+
+.progression-track {
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+  right: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--accent-discover) 0%, 
+    var(--accent-progress) 50%, 
+    var(--accent-robot) 100%
+  );
+  transform: translateY(-50%);
+  border-radius: 8px;
+  z-index: 0;
+}
+
+.progression-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  z-index: 1;
+}
+
+.progression-marker {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-discover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.progression-stage--training .progression-marker {
+  border-color: var(--accent-discover);
+}
+
+.progression-stage--intermediate .progression-marker {
+  border-color: var(--accent-progress);
+}
+
+.progression-stage--advanced .progression-marker {
+  border-color: var(--accent-robot);
+}
+
+.progression-icon {
+  font-size: 1.5rem;
+}
+
+.progression-content {
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 200px;
 }
 
-.gamification-slide__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-muted);
+.progression-phase {
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
   margin-bottom: var(--space-1);
 }
 
-.gamification-slide__title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-4);
-}
-
-.gamification-slide__intro {
+.progression-title {
   font-size: var(--font-size-base);
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.gamification-slide__stages {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-}
-
-.stage-card {
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.stage-card__header {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-}
-
-.stage-card__icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-}
-
-.stage-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.stage-card__phase {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--accent-discover);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.stage-card__title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--space-1);
 }
 
-.stage-card__description {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.stage-card__skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.stage-card__skill {
+.progression-content p {
   font-size: var(--font-size-xs);
-  color: var(--text-muted);
-  background: var(--bg-tertiary);
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-full);
-}
-
-.gamification-slide__insight {
-  padding: var(--space-4);
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.gamification-slide__insight h3 {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-2);
-}
-
-.gamification-slide__insight p {
-  font-size: var(--font-size-sm);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-@media (max-width: 900px) {
-  .gamification-slide__stages {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .progression-visual {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding-left: var(--space-8);
+  }
+  
+  .progression-track {
+    top: 60px;
+    bottom: 60px;
+    left: 28px;
+    right: auto;
+    width: 3px;
+    height: auto;
+    background: linear-gradient(180deg, 
+      var(--accent-discover) 0%, 
+      var(--accent-progress) 50%, 
+      var(--accent-robot) 100%
+    );
+    transform: none;
+  }
+  
+  .progression-stage {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  
+  .progression-content {
+    text-align: left;
   }
 }

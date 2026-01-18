@@ -1,30 +1,93 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import './slides.css'
 import './Sensors.css'
 
 function SensorsSlide() {
+  const radarRef = useRef(null)
   const [readings, setReadings] = useState({
-    front: 42,
-    left: 25,
-    right: 248,
-    rear: 201
+    front: 150,
+    left: 150,
+    right: 150,
+    rear: 150
   })
+  const [mouseInRadar, setMouseInRadar] = useState(false)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setReadings({
-        front: Math.floor(Math.random() * 280) + 20,
-        left: Math.floor(Math.random() * 280) + 20,
-        right: Math.floor(Math.random() * 280) + 20,
-        rear: Math.floor(Math.random() * 280) + 20
-      })
-    }, 2500)
-    return () => clearInterval(interval)
+  const calculateDistances = useCallback((mouseX, mouseY) => {
+    if (!radarRef.current) return
+    
+    const rect = radarRef.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    
+    // Calculate relative position from center
+    const dx = mouseX - centerX
+    const dy = mouseY - centerY
+    
+    // Convert to cm (scale: 1px ≈ 2cm, max range ~300cm)
+    const scale = 2
+    const maxRange = 300
+    
+    // Based on CSS beam layout:
+    // front beam -> extends RIGHT from robot (positive X)
+    // rear beam -> extends LEFT from robot (negative X)  
+    // left beam -> extends UP from robot (negative Y)
+    // right beam -> extends DOWN from robot (positive Y)
+    
+    let front = maxRange, rear = maxRange, left = maxRange, right = maxRange
+    
+    // Determine primary direction based on which axis has greater magnitude
+    if (Math.abs(dx) > Math.abs(dy)) {
+      // Horizontal primary
+      if (dx > 0) {
+        // Mouse is to the right -> front sensor
+        front = Math.min(Math.abs(dx) * scale, maxRange)
+      } else {
+        // Mouse is to the left -> rear sensor
+        rear = Math.min(Math.abs(dx) * scale, maxRange)
+      }
+    } else {
+      // Vertical primary
+      if (dy < 0) {
+        // Mouse is above -> left sensor
+        left = Math.min(Math.abs(dy) * scale, maxRange)
+      } else {
+        // Mouse is below -> right sensor
+        right = Math.min(Math.abs(dy) * scale, maxRange)
+      }
+    }
+    
+    setReadings({
+      front: Math.round(front),
+      left: Math.round(left),
+      right: Math.round(right),
+      rear: Math.round(rear)
+    })
   }, [])
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!radarRef.current) return
+      
+      const rect = radarRef.current.getBoundingClientRect()
+      const isInside = e.clientX >= rect.left && e.clientX <= rect.right &&
+                       e.clientY >= rect.top && e.clientY <= rect.bottom
+      
+      setMouseInRadar(isInside)
+      
+      if (isInside) {
+        calculateDistances(e.clientX, e.clientY)
+      } else {
+        setReadings({ front: 300, left: 300, right: 300, rear: 300 })
+      }
+    }
+    
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [calculateDistances])
+
   const getStatus = (distance) => {
-    if (distance < 50) return { status: 'danger', label: 'Blocked' }
-    if (distance < 120) return { status: 'warning', label: 'Close' }
+    if (distance < 100) return { status: 'danger', label: 'Blocked' }
+    if (distance < 200) return { status: 'warning', label: 'Close' }
     return { status: 'safe', label: 'Clear' }
   }
 
@@ -38,16 +101,15 @@ function SensorsSlide() {
   return (
     <div className="slide sensors-slide">
       <div className="sensors-slide__content">
-        <div className="sensors-slide__header">
-          <h2 className="sensors-slide__label">Real-Time Awareness</h2>
-          <h1 className="sensors-slide__title">
+        <header className="slide-header slide-header--left">
+          <p className="slide-label">Real-Time Awareness</p>
+          <h1 className="slide-title">
             <span className="text-gradient">Sensor Data</span> as Decision Support
           </h1>
-          <p className="sensors-slide__desc">
-            Four ultrasonic sensors continuously measure distances to nearby obstacles. 
-            This data transforms uncertainty into actionable information.
+          <p className="slide-subtitle">
+            Four ultrasonic sensors transform uncertainty into actionable information.
           </p>
-        </div>
+        </header>
 
         <div className="sensors-slide__explanation glass-panel">
           <h3>How sensors enable decisions</h3>
@@ -58,22 +120,26 @@ function SensorsSlide() {
           <div className="sensors-slide__legend">
             <div className="legend-item legend-item--safe">
               <span className="legend-dot"></span>
-              <span>&gt;120cm — Clear path ahead</span>
+              <span>&gt;200cm — Clear path ahead</span>
             </div>
             <div className="legend-item legend-item--warning">
               <span className="legend-dot"></span>
-              <span>50-120cm — Obstacle nearby</span>
+              <span>100-200cm — Obstacle nearby</span>
             </div>
             <div className="legend-item legend-item--danger">
               <span className="legend-dot"></span>
-              <span>&lt;50cm — Path blocked</span>
+              <span>&lt;100cm — Path blocked</span>
             </div>
           </div>
         </div>
       </div>
 
       <div className="sensors-slide__visualization">
-        <div className="sensors-display glass-panel">
+        <p className="sensors-slide__hint sensors-slide__hint--prominent">
+          {mouseInRadar ? '🎯 Obstacle detected! Watch the beams react.' : '👆 Move your mouse over the radar to simulate an obstacle'}
+        </p>
+        
+        <div className="sensors-display glass-panel" ref={radarRef}>
           <div className="sensors-radar">
             <div className="sensors-radar__rings">
               <div className="sensors-radar__ring"></div>
@@ -84,7 +150,7 @@ function SensorsSlide() {
             {directions.map(dir => {
               const value = readings[dir.key]
               const info = getStatus(value)
-              const length = Math.min((value / 300) * 80, 80)
+              const length = Math.min((value / 300) * 100, 100)
               return (
                 <div 
                   key={dir.key}

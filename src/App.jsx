@@ -11,6 +11,7 @@ import FogDemoSlide from './slides/04_FogDemo'
 import SensorsSlide from './slides/05_Sensors'
 import InteractionSlide from './slides/06_Interaction'
 import GamificationSlide from './slides/07_Gamification'
+import AchievementsSlide from './slides/08_Achievements'
 import FullDemoSlide from './slides/08_FullDemo'
 import SummarySlide from './slides/09_Summary'
 
@@ -23,6 +24,9 @@ const imagesToPreload = [
   './hazardous_zone.png',
   './tonybot_real.png',
   './robot_junction.png',
+  './capability_see.png',
+  './capability_go.png',
+  './capability_stay.png',
 ]
 
 const slides = [
@@ -33,6 +37,7 @@ const slides = [
   SensorsSlide,
   InteractionSlide,
   GamificationSlide,
+  AchievementsSlide,
   FullDemoSlide,
   SummarySlide,
 ]

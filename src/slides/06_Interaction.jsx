@@ -2,63 +2,81 @@ import './slides.css'
 import './Interaction.css'
 
 function InteractionSlide() {
+  const pathOptions = [
+    {
+      direction: 'Left',
+      sensor: '45cm',
+      status: 'warning',
+      note: 'Narrow passage detected'
+    },
+    {
+      direction: 'Ahead',
+      sensor: '180cm',
+      status: 'safe',
+      note: 'Clear path, slight incline'
+    },
+    {
+      direction: 'Right',
+      sensor: '25cm',
+      status: 'danger',
+      note: 'Blocked by debris'
+    }
+  ]
+
   return (
     <div className="slide interaction-slide">
       <div className="interaction-slide__content">
-        <div className="interaction-slide__header">
-          <h2 className="interaction-slide__label">Human-Robot Partnership</h2>
-          <h1 className="interaction-slide__title">
+        <header className="slide-header slide-header--left">
+          <p className="slide-label">Human-Robot Partnership</p>
+          <h1 className="slide-title">
             When the Robot <span className="text-gradient">Needs You</span>
           </h1>
-        </div>
-
-        <div className="interaction-slide__concept glass-panel">
-          <h3>The critical moment</h3>
-          <p>
-            Autonomous exploration handles routine navigation. But at decision points—junctions, 
-            obstacles, uncertain terrain—the robot stops and <strong>asks for human guidance</strong>.
+          <p className="slide-subtitle">
+            Sensors inform. Humans decide. The robot executes.
           </p>
-          <p>
-            This isn't a limitation. It's by design. The robot provides the data; 
-            the human provides the judgment.
-          </p>
-        </div>
+        </header>
 
-        <div className="interaction-slide__flow glass-panel">
-          <h3>How it works</h3>
-          <div className="flow-steps">
-            <div className="flow-step">
-              <span className="flow-step__number">1</span>
-              <span className="flow-step__text">Robot reaches junction</span>
-            </div>
-            <div className="flow-arrow">→</div>
-            <div className="flow-step">
-              <span className="flow-step__number">2</span>
-              <span className="flow-step__text">Scans all paths</span>
-            </div>
-            <div className="flow-arrow">→</div>
-            <div className="flow-step">
-              <span className="flow-step__number">3</span>
-              <span className="flow-step__text">Human decides</span>
-            </div>
-            <div className="flow-arrow">→</div>
-            <div className="flow-step">
-              <span className="flow-step__number">4</span>
-              <span className="flow-step__text">Robot executes</span>
-            </div>
-          </div>
+        <div className="interaction-slide__principle glass-panel">
+          <p>
+            At decision points—junctions, obstacles, uncertain terrain—the robot 
+            <strong> stops and presents options</strong>. It provides data, not answers.
+          </p>
         </div>
       </div>
 
-      <div className="interaction-slide__visual">
-        <img 
-          src="./robot_junction.png" 
-          alt="Robot at tunnel junction making decision"
-          className="interaction-slide__image"
-        />
-        <p className="interaction-slide__caption">
-          At every junction, the robot pauses to scan available paths and awaits operator guidance.
-        </p>
+      <div className="interaction-slide__junction">
+        <div className="junction-visual">
+          <div className="junction-center">
+            <span className="junction-robot">🤖</span>
+            <span className="junction-label">Decision Point</span>
+          </div>
+          
+          {pathOptions.map((path, i) => (
+            <div 
+              key={i} 
+              className={`junction-path junction-path--${path.direction.toLowerCase()} junction-path--${path.status}`}
+            >
+              <div className="junction-path__arrow"></div>
+              <div className="junction-path__info glass-panel">
+                <span className="junction-path__direction">{path.direction}</span>
+                <span className="junction-path__sensor">{path.sensor}</span>
+                <span className="junction-path__note">{path.note}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="interaction-slide__callout">
+          <div className="callout-item">
+            <span className="callout-icon">📡</span>
+            <span><strong>Sensor data</strong> shows what's there</span>
+          </div>
+          <div className="callout-divider">but</div>
+          <div className="callout-item">
+            <span className="callout-icon">🧠</span>
+            <span><strong>Human judgment</strong> decides what to do</span>
+          </div>
+        </div>
       </div>
     </div>
   )

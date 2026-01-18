@@ -1,67 +1,52 @@
-/* Fog of War Demo - Full Featured */
+/* Fog of War Demo - Map-Dominant Layout */
 .fog-slide {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
-  padding: var(--space-6);
-  align-items: start;
+  grid-template-columns: 380px 1fr;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  align-items: center;
 }
 
 .fog-slide__context {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
-.fog-slide__header {
-  margin-bottom: var(--space-2);
-}
-
-.fog-slide__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--space-1);
-}
-
-.fog-slide__title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-}
-
+/* Reduced prominence panels */
 .fog-slide__explanation,
 .fog-slide__stats,
 .fog-slide__legend {
-  padding: var(--space-4);
+  padding: var(--space-3);
+  opacity: 0.9;
 }
 
 .fog-slide__explanation h3,
 .fog-slide__stats h3,
 .fog-slide__legend h3 {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-3);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .fog-slide__explanation p {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 .fog-slide__stat-row {
   display: flex;
   justify-content: space-between;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   margin-bottom: var(--space-1);
 }
 
 .fog-slide__stat-row span:first-child {
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .fog-slide__stat-value {
@@ -74,10 +59,10 @@
 }
 
 .fog-slide__progress-bar {
-  height: 6px;
+  height: 4px;
   background: var(--bg-tertiary);
   border-radius: var(--radius-full);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
   overflow: hidden;
 }
 
@@ -98,27 +83,27 @@
 .fog-slide__legend-items {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 
 .fog-slide__legend-item {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-xs);
-  color: var(--text-secondary);
+  gap: var(--space-1);
+  font-size: 10px;
+  color: var(--text-muted);
 }
 
 .fog-slide__legend-box {
-  width: 16px;
-  height: 16px;
-  border-radius: var(--radius-sm);
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
 }
 
 .fog-slide__legend-box--hidden {
   background: var(--border-default);
-  filter: blur(2px);
-  opacity: 0.5;
+  filter: blur(1px);
+  opacity: 0.4;
 }
 
 .fog-slide__legend-box--revealed {
@@ -135,71 +120,108 @@
   background: var(--accent-danger);
 }
 
+/* Main map area - dominant */
 .fog-slide__demo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--space-4);
 }
 
 .fog-demo__grid {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
-  gap: 3px;
-  background: var(--bg-tertiary);
-  padding: var(--space-3);
-  border-radius: var(--radius-lg);
-  max-width: 380px;
+  gap: 4px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.95));
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
   width: 100%;
+  max-width: 480px;
   aspect-ratio: 1;
-  box-shadow: var(--shadow-md);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 40px rgba(2, 132, 199, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
+/* Unknown cells - foggy effect */
 .fog-demo__cell {
   aspect-ratio: 1;
-  background: var(--border-default);
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
   border-radius: var(--radius-sm);
   position: relative;
-  transition: all var(--transition-base);
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: blur(2px);
-  opacity: 0.3;
+  filter: blur(3px);
+  opacity: 0.35;
 }
 
+/* Revealed cells - clear with subtle blue tint */
 .fog-demo__cell--revealed {
   filter: blur(0);
   opacity: 1;
-  background: rgba(2, 132, 199, 0.2);
-  box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.3);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(2, 132, 199, 0.08));
+  box-shadow: 
+    inset 0 0 0 1px rgba(2, 132, 199, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+/* Visited cells - green tint shows path */
 .fog-demo__cell--visited {
-  background: rgba(22, 163, 74, 0.25);
-  box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.4);
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.18), rgba(22, 163, 74, 0.12));
+  box-shadow: 
+    inset 0 0 0 1px rgba(22, 163, 74, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+/* Wall cells */
 .fog-demo__cell--wall {
-  background: var(--accent-danger);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1);
 }
 
+/* Robot cell - prominent with glow */
 .fog-demo__cell--robot {
-  background: var(--accent-robot) !important;
-  box-shadow: var(--shadow-glow-robot);
+  background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+  box-shadow: 
+    0 0 0 3px rgba(251, 191, 36, 0.3),
+    0 0 20px rgba(251, 191, 36, 0.4),
+    0 0 40px rgba(251, 191, 36, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
   z-index: 2;
+  animation: robotPulse 2s ease-in-out infinite;
+}
+
+@keyframes robotPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 3px rgba(251, 191, 36, 0.3),
+      0 0 20px rgba(251, 191, 36, 0.4),
+      0 0 40px rgba(251, 191, 36, 0.2);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 5px rgba(251, 191, 36, 0.2),
+      0 0 30px rgba(251, 191, 36, 0.5),
+      0 0 60px rgba(251, 191, 36, 0.3);
+  }
 }
 
 .fog-demo__robot {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 
+/* Compact controls */
 .fog-slide__controls {
   width: 100%;
-  max-width: 380px;
+  max-width: 480px;
   display: flex;
-  flex-direction: column;
   gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
 }
 
 .fog-slide__mode-toggle {
@@ -208,12 +230,11 @@
 }
 
 .fog-slide__mode-btn {
-  flex: 1;
   padding: var(--space-2) var(--space-3);
   background: var(--bg-tertiary);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--text-secondary);
   cursor: pointer;
@@ -231,40 +252,37 @@
 }
 
 .fog-slide__keys {
-  padding: var(--space-3);
-  text-align: center;
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
 }
 
 .fog-slide__keys h4 {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-muted);
-  margin-bottom: var(--space-2);
-  text-transform: uppercase;
+  display: none;
 }
 
 .fog-slide__key-layout {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: var(--space-1);
+  align-items: center;
 }
 
 .fog-slide__key-row {
   display: flex;
-  gap: var(--space-1);
+  gap: 2px;
 }
 
 .fog-slide__keys kbd {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-tertiary);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
 }
@@ -276,6 +294,13 @@
   
   .fog-slide__context {
     order: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .fog-slide__context > * {
+    flex: 1;
+    min-width: 200px;
   }
   
   .fog-slide__demo {

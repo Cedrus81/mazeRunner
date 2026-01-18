@@ -5,21 +5,24 @@ function RobotSlide() {
   const capabilities = [
     {
       icon: '👁️',
-      title: 'See What We Can\'t',
-      desc: 'Multi-sensor array captures visual, thermal, and distance data in real-time—even in complete darkness.',
-      why: 'Because first responders shouldn\'t enter blind.'
+      title: 'See',
+      subtitle: 'what we can\'t',
+      detail: 'Sensors capture data in complete darkness',
+      image: './capability_see.png'
     },
     {
-      icon: '🛡️',
-      title: 'Go Where We Shouldn\'t',
-      desc: 'Compact tracked chassis navigates rubble, water, and tight spaces that would trap or injure humans.',
-      why: 'Because size and durability save lives.'
+      icon: '🦿',
+      title: 'Go',
+      subtitle: 'where we shouldn\'t',
+      detail: 'Bipedal design navigates hazardous terrain',
+      image: './capability_go.png'
     },
     {
       icon: '🔗',
-      title: 'Stay Connected',
-      desc: 'Continuous data stream maintains situational awareness, letting operators make informed decisions remotely.',
-      why: 'Because distance shouldn\'t mean disconnection.'
+      title: 'Stay',
+      subtitle: 'connected',
+      detail: 'Continuous data stream to operators',
+      image: './capability_stay.png'
     }
   ]
 
@@ -34,28 +37,36 @@ function RobotSlide() {
       </div>
 
       <div className="robot-slide__content">
-        <div className="robot-slide__header">
-          <p className="robot-slide__intro">Introducing</p>
-          <h1 className="robot-slide__title">
-            <span className="text-gradient">Tonybot</span> Explorer
+        <header className="slide-header slide-header--left">
+          <p className="slide-label">The Solution</p>
+          <h1 className="slide-title">
+            Meet <span className="text-gradient">Tonybot</span> Explorer
           </h1>
-          <p className="robot-slide__tagline">
+          <p className="slide-subtitle">
             Your eyes and hands where humans can't safely reach.
           </p>
-        </div>
+        </header>
 
-        <div className="robot-slide__capabilities">
+        <div className="robot-capabilities">
           {capabilities.map((cap, i) => (
-            <div key={i} className="capability glass-panel">
-              <span className="capability__icon">{cap.icon}</span>
-              <div className="capability__text">
-                <h3 className="capability__title">{cap.title}</h3>
-                <p className="capability__desc">{cap.desc}</p>
-                <p className="capability__why">{cap.why}</p>
+            <div key={i} className="capability-item">
+              <div className="capability-text">
+                <span className="capability-icon">{cap.icon}</span>
+                <div className="capability-content">
+                  <strong>{cap.title}</strong> {cap.subtitle}
+                  <span className="capability-detail">{cap.detail}</span>
+                </div>
+              </div>
+              <div className="capability-image-wrapper">
+                <img src={cap.image} alt="" className="capability-image" />
               </div>
             </div>
           ))}
         </div>
+
+        <p className="slide-takeaway">
+          Extends human capability without replacing human judgment.
+        </p>
       </div>
     </div>
   )

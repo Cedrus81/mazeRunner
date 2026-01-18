@@ -2,71 +2,58 @@ import './slides.css'
 import './Gamification.css'
 
 function GamificationSlide() {
-  const stages = [
-    {
-      phase: 'Training',
-      title: 'Learn the Basics',
-      description: 'Simple environments with clear paths. Focus on understanding controls, reading sensor data, and building confidence.',
-      skills: ['Basic navigation', 'Sensor interpretation', 'Safe movement patterns'],
-      icon: '🎯'
-    },
-    {
-      phase: 'Intermediate',
-      title: 'Handle Complexity',
-      description: 'Larger spaces with obstacles and junctions. Practice decision-making under time pressure.',
-      skills: ['Multi-path navigation', 'Risk assessment', 'Efficient exploration'],
-      icon: '📈'
-    },
-    {
-      phase: 'Advanced',
-      title: 'Real-World Ready',
-      description: 'Realistic scenarios with limited visibility, tight passages, and critical decision points. Prepare for actual deployment.',
-      skills: ['Complex terrain', 'Emergency protocols', 'Mission planning'],
-      icon: '🚀'
-    }
-  ]
-
   return (
     <div className="slide gamification-slide">
-      <div className="gamification-slide__header">
-        <h2 className="gamification-slide__label">Progressive Learning</h2>
-        <h1 className="gamification-slide__title">
+      <header className="slide-header">
+        <p className="slide-label">Progressive Learning</p>
+        <h1 className="slide-title">
           From <span className="text-gradient">Training</span> to Deployment
         </h1>
-        <p className="gamification-slide__intro">
-          Gamification isn't about points and badges. It's about building competence through 
-          structured progression—ensuring operators are ready before lives depend on their decisions.
+        <p className="slide-subtitle">
+          Structured progression ensures operators are ready before lives depend on their decisions.
         </p>
-      </div>
+      </header>
 
-      <div className="gamification-slide__stages">
-        {stages.map((stage, i) => (
-          <div key={i} className="stage-card glass-panel">
-            <div className="stage-card__header">
-              <span className="stage-card__icon">{stage.icon}</span>
-              <div className="stage-card__meta">
-                <span className="stage-card__phase">{stage.phase}</span>
-                <h3 className="stage-card__title">{stage.title}</h3>
-              </div>
-            </div>
-            <p className="stage-card__description">{stage.description}</p>
-            <div className="stage-card__skills">
-              {stage.skills.map((skill, j) => (
-                <span key={j} className="stage-card__skill">{skill}</span>
-              ))}
-            </div>
+      <div className="progression-visual">
+        <div className="progression-track"></div>
+        
+        <div className="progression-stage progression-stage--training">
+          <div className="progression-marker">
+            <span className="progression-icon">🎯</span>
           </div>
-        ))}
+          <div className="progression-content">
+            <span className="progression-phase">Training</span>
+            <strong className="progression-title">Learn the Basics</strong>
+            <p>Simple environments, clear paths. Build confidence with controls and sensors.</p>
+          </div>
+        </div>
+
+        <div className="progression-stage progression-stage--intermediate">
+          <div className="progression-marker">
+            <span className="progression-icon">📈</span>
+          </div>
+          <div className="progression-content">
+            <span className="progression-phase">Intermediate</span>
+            <strong className="progression-title">Handle Complexity</strong>
+            <p>Obstacles and junctions. Practice decision-making under pressure.</p>
+          </div>
+        </div>
+
+        <div className="progression-stage progression-stage--advanced">
+          <div className="progression-marker">
+            <span className="progression-icon">🚀</span>
+          </div>
+          <div className="progression-content">
+            <span className="progression-phase">Advanced</span>
+            <strong className="progression-title">Real-World Ready</strong>
+            <p>Realistic scenarios with limited visibility and critical decisions.</p>
+          </div>
+        </div>
       </div>
 
-      <div className="gamification-slide__insight glass-panel">
-        <h3>Why progression matters</h3>
-        <p>
-          Research shows that graduated challenge increases both skill retention and confidence. 
-          Operators who complete the full progression make <strong>40% fewer errors</strong> in 
-          real-world scenarios compared to those who skip training stages.
-        </p>
-      </div>
+      <p className="slide-takeaway">
+        Operators who complete the full progression make <strong>40% fewer errors</strong> in deployment.
+      </p>
     </div>
   )
 }

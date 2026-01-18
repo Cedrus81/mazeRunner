@@ -90,12 +90,13 @@
 
 .sensors-display {
   padding: var(--space-6);
+  cursor: crosshair;
 }
 
 .sensors-radar {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 300px;
+  height: 300px;
 }
 
 .sensors-radar__rings {
@@ -113,18 +114,18 @@
 }
 
 .sensors-radar__ring:nth-child(1) {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 .sensors-radar__ring:nth-child(2) {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
 }
 
 .sensors-radar__ring:nth-child(3) {
-  width: 180px;
-  height: 180px;
+  width: 240px;
+  height: 240px;
 }
 
 .sensors-radar__robot {
@@ -132,11 +133,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 2.5rem;
   z-index: 5;
   background: var(--bg-secondary);
   padding: var(--space-1);
   border-radius: 50%;
+}
+
+.sensors-radar__cursor-hint {
+  position: absolute;
+  font-size: 1.5rem;
+  pointer-events: none;
+  animation: pulse 1s infinite;
 }
 
 .sensors-radar__beam {
@@ -144,54 +152,67 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  opacity: 0.7;
+  transition: width 0.4s ease, height 0.4s ease;
 }
 
 .sensors-radar__beam--front {
   top: 50%;
   left: 50%;
-  transform: translateY(-50%) translateX(25px);
-  height: 24px;
+  transform: translateY(-50%) translateX(30px);
+  height: 28px;
   width: var(--beam-length);
-  background: linear-gradient(to right, currentColor 0%, transparent 100%);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  justify-content: flex-end;
 }
 
 .sensors-radar__beam--rear {
   top: 50%;
   right: 50%;
-  transform: translateY(-50%) translateX(-25px);
-  height: 24px;
+  transform: translateY(-50%) translateX(-30px);
+  height: 28px;
   width: var(--beam-length);
   flex-direction: row-reverse;
-  background: linear-gradient(to left, currentColor 0%, transparent 100%);
+  justify-content: flex-end;
   border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
 .sensors-radar__beam--left {
   left: 50%;
   bottom: 50%;
-  transform: translateX(-50%) translateY(-25px);
-  width: 24px;
+  transform: translateX(-50%) translateY(-30px);
+  width: 28px;
   height: var(--beam-length);
   flex-direction: column;
-  background: linear-gradient(to top, currentColor 0%, transparent 100%);
+  justify-content: flex-start;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .sensors-radar__beam--right {
   left: 50%;
   top: 50%;
-  transform: translateX(-50%) translateY(25px);
-  width: 24px;
+  transform: translateX(-50%) translateY(30px);
+  width: 28px;
   height: var(--beam-length);
   flex-direction: column-reverse;
-  background: linear-gradient(to bottom, currentColor 0%, transparent 100%);
+  justify-content: flex-start;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
-.sensors-radar__beam--safe { color: var(--accent-progress); }
-.sensors-radar__beam--warning { color: var(--accent-warning); }
-.sensors-radar__beam--danger { color: var(--accent-danger); }
+.sensors-radar__beam--safe { 
+  background: linear-gradient(var(--beam-direction, to right), var(--accent-progress) 0%, var(--accent-progress) 60%, transparent 100%); 
+}
+.sensors-radar__beam--warning { 
+  background: linear-gradient(var(--beam-direction, to right), var(--accent-warning) 0%, var(--accent-warning) 60%, transparent 100%); 
+}
+.sensors-radar__beam--danger { 
+  background: linear-gradient(var(--beam-direction, to right), var(--accent-danger) 0%, var(--accent-danger) 60%, transparent 100%); 
+}
+
+.sensors-radar__beam--front { --beam-direction: to right; }
+.sensors-radar__beam--rear { --beam-direction: to left; }
+.sensors-radar__beam--left { --beam-direction: to top; }
+.sensors-radar__beam--right { --beam-direction: to bottom; }
 
 .sensors-radar__reading {
   font-size: var(--font-size-xs);
@@ -248,6 +269,23 @@
 .reading-card--safe .reading-card__fill { background: var(--accent-progress); }
 .reading-card--warning .reading-card__fill { background: var(--accent-warning); }
 .reading-card--danger .reading-card__fill { background: var(--accent-danger); }
+
+.sensors-slide__hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.sensors-slide__hint--prominent {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  font-style: normal;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+}
 
 @media (max-width: 900px) {
   .sensors-slide {

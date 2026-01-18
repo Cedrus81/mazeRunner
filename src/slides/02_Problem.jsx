@@ -44,14 +44,15 @@ function ProblemSlide() {
 
   return (
     <div className="slide problem-slide">
-      <div className="problem-slide__header">
-        <p className="problem-slide__question">
-          What if the most dangerous part of a rescue mission was getting there?
-        </p>
-        <h1 className="slide__title">
+      <header className="slide-header">
+        <p className="slide-label">The Challenge</p>
+        <h1 className="slide-title slide-title--large">
           The <span className="text-gradient">Human Cost</span> of Exploration
         </h1>
-      </div>
+        <p className="slide-subtitle">
+          What if the most dangerous part of a rescue mission was getting there?
+        </p>
+      </header>
 
       <div className="problem-slide__content">
         <div className="problem-slide__visual">

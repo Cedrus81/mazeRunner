@@ -2,6 +2,73 @@
    SLIDE STYLES
    ======================================== */
 
+/* === Standard Slide Header Hierarchy === */
+.slide-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: var(--space-6);
+}
+
+.slide-header--left {
+  text-align: left;
+  margin: 0;
+  margin-bottom: var(--space-5);
+}
+
+.slide-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.slide-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--space-3);
+}
+
+.slide-title--large {
+  font-size: var(--font-size-4xl);
+}
+
+.slide-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.slide-header--left .slide-subtitle {
+  margin: 0;
+}
+
+.slide-header:not(.slide-header--left) .slide-subtitle {
+  margin: 0 auto;
+}
+
+.slide-takeaway {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-style: italic;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide-takeaway strong {
+  color: var(--text-primary);
+  font-style: normal;
+}
+
 /* === Title Slide === */
 .title-slide__robot {
   margin-bottom: var(--space-6);

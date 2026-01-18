@@ -21,6 +21,7 @@ function FullDemoSlide() {
   const [moves, setMoves] = useState(0)
   const [won, setWon] = useState(false)
   const [sensorData, setSensorData] = useState({ front: 0, left: 0, right: 0, rear: 0 })
+  const moveRobotRef = useRef(null)
 
   const calculateSensors = useCallback((row, col) => {
     const checkDistance = (dr, dc) => {
@@ -73,20 +74,26 @@ function FullDemoSlide() {
   }, [robotPos, map, won, revealAround, calculateSensors])
 
   useEffect(() => {
+    moveRobotRef.current = moveRobot
+  }, [moveRobot])
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key.toLowerCase()
       if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
         e.preventDefault()
         e.stopPropagation()
-        if (key === 'w') moveRobot(-1, 0)
-        if (key === 's') moveRobot(1, 0)
-        if (key === 'a') moveRobot(0, -1)
-        if (key === 'd') moveRobot(0, 1)
+        if (moveRobotRef.current) {
+          if (key === 'w') moveRobotRef.current(-1, 0)
+          if (key === 's') moveRobotRef.current(1, 0)
+          if (key === 'a') moveRobotRef.current(0, -1)
+          if (key === 'd') moveRobotRef.current(0, 1)
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown, { capture: true })
     return () => window.removeEventListener('keydown', handleKeyDown, { capture: true })
-  }, [moveRobot])
+  }, [])
 
   const exploredPercent = Math.round((revealed.size / (GRID_SIZE * GRID_SIZE)) * 100)
   
@@ -98,13 +105,15 @@ function FullDemoSlide() {
 
   return (
     <div className="slide fulldemo-slide">
-      <div className="fulldemo-slide__header">
-        <h2 className="fulldemo-slide__label">Try It Yourself</h2>
-        <h1 className="fulldemo-slide__title">
+      <header className="slide-header">
+        <p className="slide-label">Try It Yourself</p>
+        <h1 className="slide-title">
           The Complete <span className="text-gradient">Experience</span>
         </h1>
-        <p className="fulldemo-slide__desc">Navigate to the goal using WASD. Watch your sensors!</p>
-      </div>
+        <p className="slide-subtitle">
+          Navigate to the goal using WASD. Watch your sensors!
+        </p>
+      </header>
 
       <div className="fulldemo-slide__content">
         <div className="fulldemo-slide__map-area">

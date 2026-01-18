@@ -77,6 +77,7 @@ function FogDemoSlide() {
   const [isAutoMode, setIsAutoMode] = useState(true)
   const autoIntervalRef = useRef(null)
   const isAutoModeRef = useRef(true)
+  const moveRobotRef = useRef(null)
   
   const revealAround = useCallback((row, col, currentRevealed) => {
     const newRevealed = new Set(currentRevealed)
@@ -124,10 +125,14 @@ function FogDemoSlide() {
     return () => { if (autoIntervalRef.current) clearInterval(autoIntervalRef.current) }
   }, [isAutoMode, autoMove])
   
-  // Keep ref in sync with state
+  // Keep refs in sync
   useEffect(() => {
     isAutoModeRef.current = isAutoMode
   }, [isAutoMode])
+  
+  useEffect(() => {
+    moveRobotRef.current = moveRobot
+  }, [moveRobot])
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -136,15 +141,18 @@ function FogDemoSlide() {
       if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
         e.preventDefault()
         e.stopPropagation()
-        if (key === 'w') moveRobot(-1, 0)
-        if (key === 's') moveRobot(1, 0)
-        if (key === 'a') moveRobot(0, -1)
-        if (key === 'd') moveRobot(0, 1)
+        console.log('Key pressed:', key)
+        if (moveRobotRef.current) {
+          if (key === 'w') moveRobotRef.current(-1, 0)
+          if (key === 's') moveRobotRef.current(1, 0)
+          if (key === 'a') moveRobotRef.current(0, -1)
+          if (key === 'd') moveRobotRef.current(0, 1)
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown, { capture: true })
     return () => window.removeEventListener('keydown', handleKeyDown, { capture: true })
-  }, [moveRobot])
+  }, [])
 
   const totalCells = GRID_SIZE * GRID_SIZE
   const wallCount = 17
@@ -154,12 +162,15 @@ function FogDemoSlide() {
   return (
     <div className="slide fog-slide">
       <div className="fog-slide__context">
-        <div className="fog-slide__header">
-          <h2 className="fog-slide__label">Core Mechanic</h2>
-          <h1 className="fog-slide__title">
+        <header className="slide-header slide-header--left">
+          <p className="slide-label">Core Mechanic</p>
+          <h1 className="slide-title">
             The <span className="text-gradient">Fog of War</span>
           </h1>
-        </div>
+          <p className="slide-subtitle">
+            The robot has no prior knowledge—discovery happens piece by piece.
+          </p>
+        </header>
         
         <div className="fog-slide__explanation glass-panel">
           <h3>Why can't we see everything?</h3>
