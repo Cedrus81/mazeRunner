@@ -1,53 +1,61 @@
 import './slides.css'
+import './Robot.css'
 
 function RobotSlide() {
-  const features = [
+  const capabilities = [
     {
-      icon: '📡',
-      title: 'Ultrasonic Sensors',
-      desc: 'Detects obstacles and measures distances in all directions'
+      icon: '👁️',
+      title: 'See What We Can\'t',
+      desc: 'Multi-sensor array captures visual, thermal, and distance data in real-time—even in complete darkness.',
+      why: 'Because first responders shouldn\'t enter blind.'
     },
     {
-      icon: '🎮',
-      title: 'Remote Control',
-      desc: 'Human operator makes decisions at junction points'
+      icon: '🛡️',
+      title: 'Go Where We Shouldn\'t',
+      desc: 'Compact tracked chassis navigates rubble, water, and tight spaces that would trap or injure humans.',
+      why: 'Because size and durability save lives.'
     },
     {
-      icon: '📹',
-      title: 'Live Feedback',
-      desc: 'Real-time sensor data transmitted to operator'
-    },
-    {
-      icon: '🔋',
-      title: 'Compact Design',
-      desc: 'Small form factor navigates tight spaces'
+      icon: '🔗',
+      title: 'Stay Connected',
+      desc: 'Continuous data stream maintains situational awareness, letting operators make informed decisions remotely.',
+      why: 'Because distance shouldn\'t mean disconnection.'
     }
   ]
 
   return (
-    <div className="slide">
-      <h1 className="slide__title">
-        Meet <span className="text-gradient">Tonybot</span>
-      </h1>
-      
-      <p className="slide__subtitle">
-        A remotely operated robot designed for hazardous exploration
-      </p>
-      
-      <div className="robot-slide__features">
-        {features.map((feature, i) => (
-          <div 
-            key={i} 
-            className="feature-card glass-panel animate-slide-up"
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <span className="feature-card__icon">{feature.icon}</span>
-            <div className="feature-card__content">
-              <h3>{feature.title}</h3>
-              <p>{feature.desc}</p>
+    <div className="slide robot-slide">
+      <div className="robot-slide__hero">
+        <img 
+          src="/tonybot_real.png" 
+          alt="Tonybot bipedal robot by Hiwonder"
+          className="robot-slide__image"
+        />
+      </div>
+
+      <div className="robot-slide__content">
+        <div className="robot-slide__header">
+          <p className="robot-slide__intro">Introducing</p>
+          <h1 className="robot-slide__title">
+            <span className="text-gradient">Tonybot</span> Explorer
+          </h1>
+          <p className="robot-slide__tagline">
+            Your eyes and hands where humans can't safely reach.
+          </p>
+        </div>
+
+        <div className="robot-slide__capabilities">
+          {capabilities.map((cap, i) => (
+            <div key={i} className="capability glass-panel">
+              <span className="capability__icon">{cap.icon}</span>
+              <div className="capability__text">
+                <h3 className="capability__title">{cap.title}</h3>
+                <p className="capability__desc">{cap.desc}</p>
+                <p className="capability__why">{cap.why}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

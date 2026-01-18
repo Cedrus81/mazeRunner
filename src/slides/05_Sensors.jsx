@@ -3,98 +3,120 @@ import './slides.css'
 import './Sensors.css'
 
 function SensorsSlide() {
-  const [distances, setDistances] = useState({
-    up: 3,
-    down: 5,
-    left: 2,
-    right: 4
+  const [readings, setReadings] = useState({
+    front: 42,
+    left: 25,
+    right: 248,
+    rear: 201
   })
-  
-  // Simulate sensor readings changing
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setDistances({
-        up: Math.floor(Math.random() * 5) + 1,
-        down: Math.floor(Math.random() * 5) + 1,
-        left: Math.floor(Math.random() * 5) + 1,
-        right: Math.floor(Math.random() * 5) + 1,
+      setReadings({
+        front: Math.floor(Math.random() * 280) + 20,
+        left: Math.floor(Math.random() * 280) + 20,
+        right: Math.floor(Math.random() * 280) + 20,
+        rear: Math.floor(Math.random() * 280) + 20
       })
-    }, 2000)
-    
+    }, 2500)
     return () => clearInterval(interval)
   }, [])
 
-  const getBarClass = (distance) => {
-    if (distance <= 1) return 'sensors__bar--danger'
-    if (distance <= 2) return 'sensors__bar--warning'
-    return 'sensors__bar--safe'
+  const getStatus = (distance) => {
+    if (distance < 50) return { status: 'danger', label: 'Blocked' }
+    if (distance < 120) return { status: 'warning', label: 'Close' }
+    return { status: 'safe', label: 'Clear' }
   }
 
+  const directions = [
+    { key: 'front', label: 'Front', angle: 0 },
+    { key: 'right', label: 'Right', angle: 90 },
+    { key: 'rear', label: 'Rear', angle: 180 },
+    { key: 'left', label: 'Left', angle: 270 }
+  ]
+
   return (
-    <div className="slide">
-      <h1 className="slide__title">
-        <span className="text-gradient">Ultrasonic Sensing</span>
-      </h1>
-      
-      <p className="slide__subtitle">
-        Real-time distance measurements guide navigation decisions
-      </p>
-      
-      <div className="sensors__display glass-panel">
-        <div className="sensors__radar">
-          <div className="sensors__center">🤖</div>
-          
-          {/* Up */}
-          <div className="sensors__direction sensors__direction--up">
-            <div className={`sensors__bar ${getBarClass(distances.up)}`} style={{ height: `${distances.up * 20}%` }}>
-              <span className="sensors__value">{distances.up}m</span>
-            </div>
-          </div>
-          
-          {/* Down */}
-          <div className="sensors__direction sensors__direction--down">
-            <div className={`sensors__bar ${getBarClass(distances.down)}`} style={{ height: `${distances.down * 20}%` }}>
-              <span className="sensors__value">{distances.down}m</span>
-            </div>
-          </div>
-          
-          {/* Left */}
-          <div className="sensors__direction sensors__direction--left">
-            <div className={`sensors__bar ${getBarClass(distances.left)}`} style={{ width: `${distances.left * 20}%` }}>
-              <span className="sensors__value">{distances.left}m</span>
-            </div>
-          </div>
-          
-          {/* Right */}
-          <div className="sensors__direction sensors__direction--right">
-            <div className={`sensors__bar ${getBarClass(distances.right)}`} style={{ width: `${distances.right * 20}%` }}>
-              <span className="sensors__value">{distances.right}m</span>
-            </div>
-          </div>
-          
-          {/* Ping animation */}
-          <div className="sensors__ping animate-ping"></div>
+    <div className="slide sensors-slide">
+      <div className="sensors-slide__content">
+        <div className="sensors-slide__header">
+          <h2 className="sensors-slide__label">Real-Time Awareness</h2>
+          <h1 className="sensors-slide__title">
+            <span className="text-gradient">Sensor Data</span> as Decision Support
+          </h1>
+          <p className="sensors-slide__desc">
+            Four ultrasonic sensors continuously measure distances to nearby obstacles. 
+            This data transforms uncertainty into actionable information.
+          </p>
         </div>
-        
-        <div className="sensors__legend">
-          <div className="sensors__legend-item">
-            <div className="sensors__legend-dot sensors__legend-dot--safe"></div>
-            <span>Clear path (3m+)</span>
-          </div>
-          <div className="sensors__legend-item">
-            <div className="sensors__legend-dot sensors__legend-dot--warning"></div>
-            <span>Caution (2m)</span>
-          </div>
-          <div className="sensors__legend-item">
-            <div className="sensors__legend-dot sensors__legend-dot--danger"></div>
-            <span>Blocked (≤1m)</span>
+
+        <div className="sensors-slide__explanation glass-panel">
+          <h3>How sensors enable decisions</h3>
+          <p>
+            The robot doesn't just detect walls—it provides <strong>situational awareness</strong>. 
+            Each reading tells the operator not just what's there, but what's possible.
+          </p>
+          <div className="sensors-slide__legend">
+            <div className="legend-item legend-item--safe">
+              <span className="legend-dot"></span>
+              <span>&gt;120cm — Clear path ahead</span>
+            </div>
+            <div className="legend-item legend-item--warning">
+              <span className="legend-dot"></span>
+              <span>50-120cm — Obstacle nearby</span>
+            </div>
+            <div className="legend-item legend-item--danger">
+              <span className="legend-dot"></span>
+              <span>&lt;50cm — Path blocked</span>
+            </div>
           </div>
         </div>
       </div>
-      
-      <p className="sensors__note">
-        Simulated sensor readings update every 2 seconds
-      </p>
+
+      <div className="sensors-slide__visualization">
+        <div className="sensors-display glass-panel">
+          <div className="sensors-radar">
+            <div className="sensors-radar__rings">
+              <div className="sensors-radar__ring"></div>
+              <div className="sensors-radar__ring"></div>
+              <div className="sensors-radar__ring"></div>
+            </div>
+            <div className="sensors-radar__robot">🤖</div>
+            {directions.map(dir => {
+              const value = readings[dir.key]
+              const info = getStatus(value)
+              const length = Math.min((value / 300) * 80, 80)
+              return (
+                <div 
+                  key={dir.key}
+                  className={`sensors-radar__beam sensors-radar__beam--${dir.key} sensors-radar__beam--${info.status}`}
+                  style={{ '--beam-length': `${length}px` }}
+                >
+                  <span className="sensors-radar__reading">{value}cm</span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="sensors-slide__readings">
+          {directions.map(dir => {
+            const value = readings[dir.key]
+            const info = getStatus(value)
+            return (
+              <div key={dir.key} className={`reading-card glass-panel reading-card--${info.status}`}>
+                <span className="reading-card__direction">{dir.label}</span>
+                <span className="reading-card__value">{value}cm</span>
+                <div className="reading-card__bar">
+                  <div 
+                    className="reading-card__fill"
+                    style={{ width: `${Math.min((value / 300) * 100, 100)}%` }}
+                  />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
     </div>
   )
 }

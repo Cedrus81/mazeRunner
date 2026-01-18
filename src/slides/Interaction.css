@@ -1,115 +1,123 @@
-.interaction__junction {
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Interaction Slide - Human-Robot Partnership */
+.interaction-slide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
+  padding: var(--space-6);
+  align-items: center;
 }
 
-.interaction__robot {
-  font-size: 3rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.interaction__paths {
+.interaction-slide__content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  width: 100%;
-  max-width: 350px;
+  gap: var(--space-5);
 }
 
-.interaction__path {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+.interaction-slide__header {
+  margin-bottom: var(--space-2);
+}
+
+.interaction-slide__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-1);
+}
+
+.interaction-slide__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.interaction-slide__concept,
+.interaction-slide__flow {
   padding: var(--space-4);
-  background: var(--bg-tertiary);
-  border: 2px solid var(--border-default);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  text-align: left;
 }
 
-.interaction__path:hover:not(:disabled) {
-  transform: translateX(4px);
-}
-
-.interaction__path--safe {
-  border-color: var(--accent-progress);
-}
-
-.interaction__path--safe:hover:not(:disabled) {
-  background: rgba(63, 185, 80, 0.1);
-  box-shadow: var(--shadow-glow-progress);
-}
-
-.interaction__path--warning {
-  border-color: var(--accent-warning);
-}
-
-.interaction__path--warning:hover:not(:disabled) {
-  background: rgba(210, 153, 34, 0.1);
-}
-
-.interaction__path--blocked {
-  border-color: var(--accent-danger);
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.interaction__path--selected {
-  background: rgba(88, 166, 255, 0.2);
-  border-color: var(--accent-discover);
-  box-shadow: var(--shadow-glow-discover);
-}
-
-.interaction__path-label {
+.interaction-slide__concept h3,
+.interaction-slide__flow h3 {
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  min-width: 100px;
+  margin-bottom: var(--space-3);
 }
 
-.interaction__path-desc {
-  flex: 1;
+.interaction-slide__concept p {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-2);
 }
 
-.interaction__path-icon {
-  font-size: 1.25rem;
-}
-
-.interaction__decision {
+.flow-steps {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-}
-
-.interaction__decision-label {
-  color: var(--text-secondary);
-}
-
-.interaction__decision-value {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--accent-discover);
-}
-
-.interaction__history {
-  display: flex;
   gap: var(--space-2);
   flex-wrap: wrap;
 }
 
-.interaction__history-item {
-  width: 32px;
-  height: 32px;
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--bg-tertiary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+.flow-step__number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-discover);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-tertiary);
-  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.flow-step__text {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.flow-arrow {
+  color: var(--text-muted);
   font-size: var(--font-size-lg);
+}
+
+.interaction-slide__visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.interaction-slide__image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.interaction-slide__caption {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .interaction-slide {
+    grid-template-columns: 1fr;
+  }
+  
+  .interaction-slide__visual {
+    order: -1;
+  }
 }

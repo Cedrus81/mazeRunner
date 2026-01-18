@@ -1,0 +1,115 @@
+/* Robot Slide - Hero Product Presentation */
+.robot-slide {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-8);
+  padding: var(--space-6);
+  align-items: center;
+}
+
+.robot-slide__hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.robot-slide__image {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+.robot-slide__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.robot-slide__header {
+  text-align: left;
+}
+
+.robot-slide__intro {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.robot-slide__title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.robot-slide__tagline {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.robot-slide__capabilities {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.capability {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  align-items: flex-start;
+}
+
+.capability__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.capability__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.capability__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.capability__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.capability__why {
+  font-size: var(--font-size-xs);
+  color: var(--accent-discover);
+  font-style: italic;
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 900px) {
+  .robot-slide {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  
+  .robot-slide__hero {
+    order: -1;
+  }
+  
+  .robot-slide__image {
+    max-height: 250px;
+  }
+  
+  .robot-slide__header {
+    text-align: center;
+  }
+}
