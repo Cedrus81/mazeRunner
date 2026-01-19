@@ -17,19 +17,15 @@ import SummarySlide from './slides/09_Summary'
 
 // All images to preload for seamless transitions
 const imagesToPreload = [
-  './rescue_hero.png',
   './collapsed_structure.png',
   './flooded_tunnel.png',
   './narrow_pipe.png',
   './hazardous_zone.png',
   './tonybot_real.png',
-  './robot_junction.png',
   './capability_see.png',
   './capability_go.png',
   './capability_stay.png',
   './robot.svg',
-  './robot_hero.png',
-  './tonybot_hero.png',
   './Gemini_Generated_Image_sjkg54sjkg54sjkg.png',
 ]
 
