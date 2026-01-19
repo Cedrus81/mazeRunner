@@ -27,6 +27,10 @@ const imagesToPreload = [
   './capability_see.png',
   './capability_go.png',
   './capability_stay.png',
+  './robot.svg',
+  './robot_hero.png',
+  './tonybot_hero.png',
+  './Gemini_Generated_Image_sjkg54sjkg54sjkg.png',
 ]
 
 const slides = [

@@ -1,4 +1,10 @@
 /* Title Slide - Cinematic Hero */
+
+/* Override slide-content max-width for title slide */
+.slide-content:has(.title-slide) {
+  max-width: none;
+}
+
 .title-slide {
   position: relative;
   display: flex;
@@ -18,6 +24,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 0 -29px;
 }
 
 .title-slide__overlay {

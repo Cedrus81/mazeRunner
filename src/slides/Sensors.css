@@ -133,11 +133,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2.5rem;
+  font-size: 2rem;
   z-index: 5;
   background: var(--bg-secondary);
-  padding: var(--space-1);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
+  border: 2px solid var(--border-default);
 }
 
 .sensors-radar__cursor-hint {
@@ -153,7 +158,13 @@
   align-items: center;
   justify-content: flex-end;
   opacity: 0.7;
-  transition: width 0.4s ease, height 0.4s ease;
+  /* Fast reaction on enter (0ms delay), slow cautious leave (150ms delay) */
+  transition: width 0.15s ease-out 150ms, height 0.15s ease-out 150ms;
+}
+
+.sensors-radar__beam.entering,
+.sensors-display:hover .sensors-radar__beam {
+  transition: width 0.1s ease-out 0ms, height 0.1s ease-out 0ms;
 }
 
 .sensors-radar__beam--front {
@@ -263,7 +274,12 @@
 .reading-card__fill {
   height: 100%;
   border-radius: var(--radius-full);
-  transition: width var(--transition-base);
+  /* Fast reaction on enter (0ms delay), slow cautious leave (150ms delay) */
+  transition: width 0.15s ease-out 150ms;
+}
+
+.sensors-display:hover ~ .sensors-slide__readings .reading-card__fill {
+  transition: width 0.1s ease-out 0ms;
 }
 
 .reading-card--safe .reading-card__fill { background: var(--accent-progress); }
