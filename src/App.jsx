@@ -29,6 +29,11 @@ const imagesToPreload = [
   './Gemini_Generated_Image_sjkg54sjkg54sjkg.png',
 ]
 
+// Videos to preload
+const videosToPreload = [
+  './mazerunner-poc.mp4',
+]
+
 const slides = [
   TitleSlide,
   ProblemSlide,
@@ -46,24 +51,36 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState(false)
 
-  // Preload all images on mount
+  // Preload all images and videos on mount
   useEffect(() => {
     let loadedCount = 0
-    const totalImages = imagesToPreload.length
+    const totalAssets = imagesToPreload.length + videosToPreload.length
 
+    const onAssetLoad = () => {
+      loadedCount++
+      if (loadedCount >= totalAssets) {
+        setImagesLoaded(true)
+      }
+    }
+
+    // Preload images
     imagesToPreload.forEach(src => {
       const img = new Image()
-      img.onload = img.onerror = () => {
-        loadedCount++
-        if (loadedCount >= totalImages) {
-          setImagesLoaded(true)
-        }
-      }
+      img.onload = img.onerror = onAssetLoad
       img.src = src
     })
 
-    // Fallback: show content after 3 seconds even if images fail
-    const timeout = setTimeout(() => setImagesLoaded(true), 3000)
+    // Preload videos
+    videosToPreload.forEach(src => {
+      const video = document.createElement('video')
+      video.preload = 'auto'
+      video.oncanplaythrough = onAssetLoad
+      video.onerror = onAssetLoad
+      video.src = src
+    })
+
+    // Fallback: show content after 5 seconds even if assets fail (increased for video)
+    const timeout = setTimeout(() => setImagesLoaded(true), 5000)
     return () => clearTimeout(timeout)
   }, [])
 
